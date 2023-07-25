@@ -1,5 +1,5 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Contact } from "./contact.entitie";
+import { Contact } from "./contact.entity";
 
 @Entity("clients")
 export class Client {
@@ -13,7 +13,7 @@ export class Client {
   email: string;
   
   @Column({ type: "varchar", length: 9, nullable: true })
-  phone: number | null;
+  phone: number | null | undefined;
 
   @CreateDateColumn({ type: "date" })
   created_at?: string;
