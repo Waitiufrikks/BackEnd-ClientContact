@@ -9,9 +9,10 @@ export const contactSchema = z.object({
   }).nullish().optional(),
   created_at: z.string().optional(),
 });
+export const contactSchemaResponse = contactSchema
+export const allContactsSchemaResponse = z.array(contactSchemaResponse);
 
 export const contactSchemaRequest = contactSchema.omit({
   id: true,
   created_at: true
 })
-export const contactSchemaResponse = contactSchema
