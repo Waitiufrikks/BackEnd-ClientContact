@@ -5,6 +5,8 @@ import { AppDataSource } from "../data-source";
 import { AppError } from "../error";
 import { Contact } from "../entities/contact.entity";
 import { TContactRequest } from "../interfaces/contact.interface";
+import { TClientRequest } from "../interfaces/client.interface";
+import { Client } from "../entities/client.entity";
 
 
 export const ensureEmailExists = async (
@@ -12,13 +14,19 @@ export const ensureEmailExists = async (
   response: Response,
   next: NextFunction
 ) => {
-  const newContact: TContactRequest = request.body;
-
+  const { email }: { email: string } = request.body;
   const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
-  const findUserByEmail = await contactRepository.findOne({
-    where: { email: newContact.email },
+  const clientRepository: Repository<Client> = AppDataSource.getRepository(Client);
+
+  const findClientByEmail = await clientRepository.findOne({
+    where: { email },
+    select: ["id"],
   });
-    if (findUserByEmail) {
+  const findContactByEmail = await contactRepository.findOne({
+    where: { email },
+    select: ["id"],
+  });
+    if (findClientByEmail || findContactByEmail) {
       throw new AppError("Email already exists", 409);
   }
   return next();

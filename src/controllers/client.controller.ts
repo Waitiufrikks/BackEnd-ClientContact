@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { createdClientService } from "../services/clients/createClient.service";
+import { createdClientService } from "../services/client/createClient.service";
 
-export const createClientController = async (
+export const createdClientController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
@@ -13,7 +13,6 @@ export const listClientController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
-
 
   return response.status(200).json({});
 }
