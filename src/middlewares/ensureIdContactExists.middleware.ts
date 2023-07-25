@@ -14,12 +14,13 @@ export const ensureIdContactExists = async (
   const contactRepository: Repository<Contact> =
     AppDataSource.getRepository(Contact);
 
-  const findContactByEmail = await contactRepository.findOne({
+  const findContactById = await contactRepository.findOne({
     where: { id: idParams },
     select: ["id"],
   });
-  if (!findContactByEmail) {
+  if (!findContactById) {
     throw new AppError("Contact not found.", 404);
   }
+  response.locals.contact = findContactById;
   return next();
 };

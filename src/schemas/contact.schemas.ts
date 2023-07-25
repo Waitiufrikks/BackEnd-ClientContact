@@ -16,3 +16,7 @@ export const contactSchemaRequest = contactSchema.omit({
   id: true,
   created_at: true
 })
+
+export const contactSchemaUpdate = contactSchema.omit({
+  id: true
+}).partial()

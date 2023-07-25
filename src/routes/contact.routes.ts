@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { createdContactController, listContactByIdController, listContactController } from "../controllers/contact.controller";
+import {
+  createdContactController,
+  deleteContactController,
+  listContactByIdController,
+  listContactController,
+  updateContactController,
+} from "../controllers/contact.controller";
 import { ensureEmailExists } from "../middlewares/ensureEmailExists.middleware";
 import { contactSchemaRequest } from "../schemas/contact.schemas";
 import { ensureValidateBody } from "../middlewares/ensureValidateBody.middleware";
@@ -13,12 +19,7 @@ contactRoutes.post(
   ensureEmailExists,
   createdContactController
 );
-contactRoutes.get(
-  "",
-  listContactController
-)
-contactRoutes.get(
-  "/:id",
-  ensureIdContactExists,
-  listContactByIdController
-)
+contactRoutes.get("", listContactController);
+contactRoutes.get("/:id", ensureIdContactExists, listContactByIdController);
+contactRoutes.patch("/:id", ensureIdContactExists, updateContactController);
+contactRoutes.delete("/:id", ensureIdContactExists, deleteContactController);
