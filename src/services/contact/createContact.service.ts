@@ -8,9 +8,9 @@ import { contactSchemaResponse } from "../../schemas/contact.schemas";
 export const createdContactService = async (
   payload: TContactRequest
 ): Promise<TContactResponse> => {
-  const userRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
-  const newContact = userRepository.create(payload);
-  await userRepository.save(newContact)
+  const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
+  const newContact = contactRepository.create(payload);
+  await contactRepository.save(newContact)
   const returnContact = contactSchemaResponse.parse(newContact)
   return returnContact
 };
