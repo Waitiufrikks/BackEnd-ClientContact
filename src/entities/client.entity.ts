@@ -12,7 +12,7 @@ export class Client {
   @Column({ type: "varchar", length: 45, unique: true })
   email: string;
   
-  @Column({ type: "varchar", length: 9, nullable: true })
+  @Column({ type: "integer", nullable: true })
   phone: number | null | undefined;
 
   @CreateDateColumn({ type: "date" })

@@ -11,9 +11,9 @@ export const clientSchema = z.object({
   clients_contact: z.array(contactSchema).optional().nullish(),
   created_at: z.string().nullish().optional(),
 });
-
+export const clientSchemaResponse = clientSchema
+export const allClientsSchemaResponse = z.array(clientSchemaResponse)
 export const clientSchemaRequest = clientSchema.omit({
   id: true,
   created_at: true
 })
-export const clientSchemaResponse = clientSchema
