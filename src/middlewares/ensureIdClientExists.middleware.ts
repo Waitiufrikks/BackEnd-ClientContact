@@ -3,7 +3,6 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 
 import { AppError } from "../error";
-import { Contact } from "../entities/contact.entity";
 import { Client } from "../entities/client.entity";
 
 export const ensureIdClientExists = async (
