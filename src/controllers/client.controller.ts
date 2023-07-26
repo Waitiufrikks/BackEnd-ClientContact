@@ -1,27 +1,40 @@
 import { Request, Response } from "express";
 import { createdClientService } from "../services/client/createClient.service";
+import { listAllClientsService } from "../services/client/listAllClients.service";
+import { listClientByIdService } from "../services/client/listClientById.service";
+import { TClientRequest, TClientResponse, TClientsResponse } from "../interfaces/client.interface";
 
 export const createdClientController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
-  const payload = request.body;
-  const newClient = await createdClientService(payload);
+  const payload:TClientRequest = request.body;
+  const newClient:TClientResponse = await createdClientService(payload);
   return response.status(201).json(newClient);
 };
+
 export const listClientController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
+  const listClients = await listAllClientsService();
+  return response.status(200).json(listClients);
+};
 
-  return response.status(200).json({});
-}
+export const listClientByIdController = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const idParams:number = Number(request.params.id);
+  const clientLocals = response.locals.client
+  const listClient:TClientResponse = await listClientByIdService(idParams);
+  return response.status(200).json(listClient);
+};
 
 export const updateClientController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
-
   return response.status(200).json({});
 };
 
@@ -29,6 +42,5 @@ export const deleteClientController = async (
   request: Request,
   response: Response
 ): Promise<Response> => {
-
   return response.status(204).json();
 };
