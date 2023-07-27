@@ -11,9 +11,10 @@ export const createdContactController = async (
   response: Response
 ): Promise<Response> => {
   const payload = request.body;
-  const idParams: number = Number(request.params.id);
+  const idClient: number = Number(response.locals.idClient);
+  console.log(idClient)
 
-  const newContact = await createdContactService(idParams,payload);
+  const newContact = await createdContactService(idClient,payload);
   return response.status(201).json(newContact);
 };
 export const listContactController = async (

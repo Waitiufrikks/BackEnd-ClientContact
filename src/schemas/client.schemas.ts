@@ -9,7 +9,7 @@ export const clientSchema = z.object({
     message: "The phone field must have exactly 9 digits.",
   }).nullish().optional(),
   password:z.string(),
-  contact: z.array(contactSchema).optional().nullish(),
+  contacts: z.array(contactSchema).optional(),
   created_at: z.string().nullish().optional(),
 });
 export const clientSchemaResponse = clientSchema.omit({
@@ -18,5 +18,6 @@ export const clientSchemaResponse = clientSchema.omit({
 export const allClientsSchemaResponse = z.array(clientSchemaResponse)
 export const clientSchemaRequest = clientSchema.omit({
   id: true,
+  contacts:true,
   created_at: true
 })

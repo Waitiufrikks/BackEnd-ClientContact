@@ -10,13 +10,15 @@ export const createdContactService = async (
   payload: TContactRequest
 ): Promise<TContactResponse> => {
   const contactRepository: Repository<Contact> =
-    AppDataSource.getRepository(Contact);
+  AppDataSource.getRepository(Contact);
   const clientRepository: Repository<Client> =
-    AppDataSource.getRepository(Client);
+  AppDataSource.getRepository(Client);
   const findIdClient = await clientRepository.findOne({
     where: { id: idClient },
-    select: ["id"],
+    select: ["id"]
   });
+  console.log("caralho o playbuda se fudeu",findIdClient)
+  console.log('porque verme quando morre é porque mereceu',idClient)
   const newContact = contactRepository.create({
     ...payload,
     client: findIdClient!,
