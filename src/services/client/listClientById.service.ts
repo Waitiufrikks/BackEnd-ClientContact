@@ -9,7 +9,11 @@ export const listClientByIdService = async (
 ): Promise<TClientResponse> => {
   const repositoryClient: Repository<Client> =
     AppDataSource.getRepository(Client);
-  const client = await repositoryClient.findOneBy({ id: idParams });
+    const client = await repositoryClient
+    .createQueryBuilder("client") 
+    .where("client.id = :id", { id: idParams }) 
+    .leftJoinAndSelect("client.contact", "contacts")
+    .getOne();
   const returnClient = clientSchemaResponse.parse(client);
 
   return returnClient;

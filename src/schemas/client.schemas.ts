@@ -8,7 +8,7 @@ export const clientSchema = z.object({
   phone: z.number().refine((val) => String(val).length === 9, {
     message: "The phone field must have exactly 9 digits.",
   }).nullish().optional(),
-  clients_contact: z.array(contactSchema).optional().nullish(),
+  contact: z.array(contactSchema).optional().nullish(),
   created_at: z.string().nullish().optional(),
 });
 export const clientSchemaResponse = clientSchema
