@@ -10,16 +10,18 @@ import { ensureEmailExists } from "../middlewares/ensureEmailExists.middleware";
 import { contactSchemaRequest } from "../schemas/contact.schemas";
 import { ensureValidateBody } from "../middlewares/ensureValidateBody.middleware";
 import { ensureIdContactExists } from "../middlewares/ensureIdContactExists.middleware";
+import { ensureTokenIsValid } from "../middlewares/ensereTokenIsValid.middleware";
 
 export const contactRoutes: Router = Router();
 
 contactRoutes.post(
-  "/:id/client",
+  "",
   ensureValidateBody(contactSchemaRequest),
+  ensureTokenIsValid,
   ensureEmailExists,
   createdContactController
 );
 contactRoutes.get("", listContactController);
 contactRoutes.get("/:id", ensureIdContactExists, listContactByIdController);
-contactRoutes.patch("/:id", ensureIdContactExists, updateContactController);
-contactRoutes.delete("/:id", ensureIdContactExists, deleteContactController);
+contactRoutes.patch("/:id",  ensureTokenIsValid,ensureIdContactExists, updateContactController);
+contactRoutes.delete("/:id",  ensureTokenIsValid,ensureIdContactExists, deleteContactController);
