@@ -14,7 +14,7 @@ import { ensureIdContactExists } from "../middlewares/ensureIdContactExists.midd
 export const contactRoutes: Router = Router();
 
 contactRoutes.post(
-  "",
+  "/:id/client",
   ensureValidateBody(contactSchemaRequest),
   ensureEmailExists,
   createdContactController
