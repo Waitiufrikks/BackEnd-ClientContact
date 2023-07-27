@@ -19,5 +19,5 @@ export class Client {
   created_at?: string;
 
   @OneToMany(() => Contact,(contact) => contact.client)
-  contact: Contact[];
+  contacts: Contact[];
 }
