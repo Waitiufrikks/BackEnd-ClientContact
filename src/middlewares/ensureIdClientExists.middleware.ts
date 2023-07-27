@@ -10,12 +10,17 @@ export const ensureIdClientExists = async (
   response: Response,
   next: NextFunction
 ) => {
-  const idParams: number = Number(request.params.id);
+  let idClient: number = Number(request.params.id);
+   ;
+
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
-
+    const method = request.method;
+    if (method == "POST") {
+      idClient = Number(response.locals.idClient);
+    }
   const findClientById = await clientRepository.findOne({
-    where: { id: idParams },
+    where: { id: idClient },
     select: ["id"],
   });
   if (!findClientById) {
