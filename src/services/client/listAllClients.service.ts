@@ -9,7 +9,7 @@ export const listAllClientsService = async():Promise<TClientsResponse>=>{
   const listClients = await repositoryClient
   .createQueryBuilder("client") 
   .orderBy("client.id", "ASC")
-  .leftJoinAndSelect("client.contact", "contacts")
+  .leftJoinAndSelect("client.contacts", "contacts")
   .getMany();
   const returnClients = allClientsSchemaResponse.parse(listClients)
 

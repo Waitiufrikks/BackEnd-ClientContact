@@ -12,7 +12,7 @@ export const listClientByIdService = async (
     const client = await repositoryClient
     .createQueryBuilder("client") 
     .where("client.id = :id", { id: idParams }) 
-    .leftJoinAndSelect("client.contact", "contacts")
+    .leftJoinAndSelect("client.contacts", "contacts")
     .getOne();
   const returnClient = clientSchemaResponse.parse(client);
 
