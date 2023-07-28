@@ -5,6 +5,7 @@ import { ensureValidateBody } from "../middlewares/ensureValidateBody.middleware
 import { createdClientController, deleteClientController, listClientByIdController, listClientController, updateClientController } from "../controllers/client.controller";
 import { ensureIdClientExists } from "../middlewares/ensureIdClientExists.middleware";
 import { ensureTokenIsValid } from "../middlewares/ensureTokenIsValid.middleware";
+import { ensureValidPermission } from "../middlewares/ensureValidPermission.middleware";
 
 export const clientRoutes: Router = Router();
 
@@ -16,5 +17,5 @@ clientRoutes.post(
 );
 clientRoutes.get("",listClientController)
 clientRoutes.get("/:id",ensureIdClientExists,listClientByIdController)
-clientRoutes.patch("/:id",ensureTokenIsValid, ensureIdClientExists, ensureEmailExists,updateClientController)
-clientRoutes.delete("/:id",ensureTokenIsValid, ensureIdClientExists, deleteClientController)
+clientRoutes.patch("/:id",ensureTokenIsValid, ensureIdClientExists, ensureValidPermission,ensureEmailExists,updateClientController)
+clientRoutes.delete("/:id",ensureTokenIsValid, ensureIdClientExists, ensureValidPermission,deleteClientController)
