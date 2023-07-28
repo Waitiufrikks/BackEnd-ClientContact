@@ -12,6 +12,7 @@ import { ensureValidateBody } from "../middlewares/ensureValidateBody.middleware
 import { ensureIdContactExists } from "../middlewares/ensureIdContactExists.middleware";
 import { ensureTokenIsValid } from "../middlewares/ensureTokenIsValid.middleware";
 import { ensureIdClientExists } from "../middlewares/ensureIdClientExists.middleware";
+import { ensureClientIsOwnerContact } from "../middlewares/ensureClientIsOwnerContact.middleware";
 
 export const contactRoutes: Router = Router();
 
@@ -25,5 +26,5 @@ contactRoutes.post(
 );
 contactRoutes.get("", listContactController);
 contactRoutes.get("/:id", ensureIdContactExists, listContactByIdController);
-contactRoutes.patch("/:id",  ensureTokenIsValid,ensureIdContactExists, updateContactController);
-contactRoutes.delete("/:id",  ensureTokenIsValid,ensureIdContactExists, deleteContactController);
+contactRoutes.patch("/:id",  ensureTokenIsValid,ensureIdContactExists, ensureClientIsOwnerContact, updateContactController);
+contactRoutes.delete("/:id",  ensureTokenIsValid,ensureIdContactExists, ensureClientIsOwnerContact, deleteContactController);
