@@ -22,7 +22,7 @@ export class Client {
   @CreateDateColumn({ type: "date" })
   created_at?: string;
 
-  @OneToMany(() => Contact,(contact) => contact.client)
+  @OneToMany(() => Contact,contact => contact.client)
   contacts: Contact[];
   @BeforeInsert()
   @BeforeUpdate()
