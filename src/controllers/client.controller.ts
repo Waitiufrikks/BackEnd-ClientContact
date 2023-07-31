@@ -10,6 +10,7 @@ import {
 } from "../interfaces/client.interface";
 import { updateClientService } from "../services/client/updateClient.service";
 import { deleteClientService } from "../services/client/deleteClient.service";
+import {readProfileClientService } from "../services/client/readProfileClient.service";
 
 export const createdClientController = async (
   request: Request,
@@ -18,6 +19,15 @@ export const createdClientController = async (
   const payload: TClientRequest = request.body;
   const newClient: TClientResponse = await createdClientService(payload);
   return response.status(201).json(newClient);
+};
+
+export const readProfileClientController = async (
+  request: Request,
+  response: Response
+): Promise<Response> => {
+  const idClient = response.locals.idClient
+  const listClients = await readProfileClientService(idClient);
+  return response.status(200).json(listClients);
 };
 
 export const listClientController = async (

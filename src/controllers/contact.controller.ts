@@ -4,7 +4,10 @@ import { listContactService } from "../services/contact/listContact.service";
 import { listContactByIdService } from "../services/contact/listContactById.service";
 import { deleteContactService } from "../services/contact/deleteContact.service";
 import { updateContactService } from "../services/contact/updateContact.service";
-import { TContactResponse, TContactUpdate } from "../interfaces/contact.interface";
+import {
+  TContactResponse,
+  TContactUpdate,
+} from "../interfaces/contact.interface";
 
 export const createdContactController = async (
   request: Request,
@@ -12,9 +15,8 @@ export const createdContactController = async (
 ): Promise<Response> => {
   const payload = request.body;
   const idClient: number = Number(response.locals.idClient);
-  console.log(idClient)
 
-  const newContact = await createdContactService(idClient,payload);
+  const newContact = await createdContactService(idClient, payload);
   return response.status(201).json(newContact);
 };
 export const listContactController = async (
@@ -42,7 +44,10 @@ export const updateContactController = async (
 ): Promise<Response> => {
   const payload: TContactUpdate = request.body;
   const idParams: number = Number(request.params.id);
-  const newContact:TContactResponse = await updateContactService(idParams, payload);
+  const newContact: TContactResponse = await updateContactService(
+    idParams,
+    payload
+  );
 
   return response.status(200).json(newContact);
 };

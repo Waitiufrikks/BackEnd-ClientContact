@@ -9,7 +9,6 @@ export const updateClientService = async (
   idClient: number,
   payload:TClientUpdate
 ): Promise<TClientResponse> => {
-  console.log( "OIIIIIIIIIIIIIIIIIIIIII",idClient)
   const clientRepository: Repository<Client> =
     AppDataSource.getRepository(Client);
     const client = await clientRepository.findOneBy({ id: idClient })
