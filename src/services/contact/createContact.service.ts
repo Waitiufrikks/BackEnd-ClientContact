@@ -17,8 +17,7 @@ export const createdContactService = async (
     where: { id: idClient },
     select: ["id"]
   });
-  console.log("caralho o playbuda se fudeu",findIdClient)
-  console.log('porque verme quando morre é porque mereceu',idClient)
+
   const newContact = contactRepository.create({
     ...payload,
     client: findIdClient!,

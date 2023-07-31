@@ -13,7 +13,7 @@ export const listContactByIdService = async (
   const listContact = await repositoryContact.findOne({
     where: { id: contactId },
   });
-  console.log(listContact);
+
   const returnContacts = contactSchemaResponse.parse(listContact);
 
   return returnContacts;
