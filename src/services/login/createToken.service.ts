@@ -27,7 +27,9 @@ export const createTokenService = async (
   }
 
   const token = sign(
-    {},
+    {
+      id:client.id
+    },
     process.env.SECRET_KEY!,
     {
       expiresIn: "24h",
