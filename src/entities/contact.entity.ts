@@ -12,8 +12,8 @@ export class Contact {
   @Column({ type: "varchar", length: 45, unique: true })
   email: string;
   
-  @Column({ type: "integer", nullable: true })
-  phone: number | null | undefined;
+  @Column({ type: "varchar", nullable: true })
+  phone: string | null | undefined;
 
   @CreateDateColumn({ type: "date" })
   created_at?: string;
