@@ -12,21 +12,26 @@ export const ensureEmailExists = async (
   next: NextFunction
 ) => {
   const { email }: { email: string } = request.body;
-  const contactRepository: Repository<Contact> =
-    AppDataSource.getRepository(Contact);
-  const clientRepository: Repository<Client> =
-    AppDataSource.getRepository(Client);
+  if (email) {
+    const contactRepository: Repository<Contact> =
+      AppDataSource.getRepository(Contact);
+    const clientRepository: Repository<Client> =
+      AppDataSource.getRepository(Client);
 
-  const findClientByEmail = await clientRepository.findOne({
-    where: { email },
-    select: ["id"],
-  });
-  const findContactByEmail = await contactRepository.findOne({
-    where: { email },
-    select: ["id"],
-  });
-  if (findClientByEmail || findContactByEmail) {
-    throw new AppError("Email already exists", 409);
+    const findClientByEmail = await clientRepository.findOne({
+      where: { email },
+      select: ["id"],
+    });
+    const findContactByEmail = await contactRepository.findOne({
+      where: { email },
+      select: ["id"],
+    });
+
+    // Se encontrarmos um cliente ou um contato com o mesmo email, lançamos um erro
+    if (findClientByEmail || findContactByEmail) {
+      throw new AppError("Email already exists", 409);
+    }
   }
+
   return next();
 };
